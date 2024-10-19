@@ -16,24 +16,17 @@
 
             <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
             <property name="jakarta.persistence.schema-generation.create-source" value="script"/>
-            <property name="jakarta.persistence.schema-generation.create-script-source" value="META-INF/create.sql"/>
-            <property name="jakarta.persistence.sql-load-script-source" value="META-INF/insert.sql"/>
-
-            <property name="jakarta.persistence.schema-generation.scripts.action" value="create"/>
-            <property name="jakarta.persistence.schema-generation.scripts.create-target" value="create.sql"/>
-
+            <property name="jakarta.persistence.schema-generation.create-script-source" value="create.sql"/>
+            <property name="jakarta.persistence.sql-load-script-source" value="insert.sql"/>
 
             <!--
-            <property name="eclipselink.ddl-generation" value="create-tables"/>
+            <property name="jakarta.persistence.schema-generation.scripts.action" value="create"/>
+            <property name="jakarta.persistence.schema-generation.scripts.create-target" value="create.sql"/>
 
-            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
-            <property name="jakarta.persistence.schema-generation.create-source" value="script"/>
-            <property name="jakarta.persistence.schema-generation.create-script-source" value="META-INF/create.sql"/>
-            <property name="jakarta.persistence.sql-load-script-source" value="META-INF/insertset.sql"/>
+            <property name="eclipselink.ddl-generation" value="create-tables"/>
 
             <property name="jakarta.persistence.schema-generation.scripts.action" value="create"/>
             <property name="jakarta.persistence.schema-generation.scripts.create-target" value="create.sql"/>
-            <property name="eclipselink.ddl-generation" value="create-tables"/>
             <property name="jakarta.persistence.schema-generation.scripts.action" value="drop-and-create"/>
             OR
             <property name="jakarta.persistence.schema-generation.scripts.action" value="create"/>
