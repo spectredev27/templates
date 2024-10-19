@@ -1,3 +1,4 @@
 .idea/
 target/
-create.sql
+./create.sql
+dependency-reduced-pom.xml
