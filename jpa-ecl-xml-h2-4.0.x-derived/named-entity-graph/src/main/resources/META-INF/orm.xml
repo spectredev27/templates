@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence/orm https://jakarta.ee/xml/ns/persistence/orm/orm_3_1.xsd"
+                 version="3.1">
+
+    <entity class="example.entity.TemplateClass">
+        <attributes>
+            <id name="id">
+                <generated-value/>
+            </id>
+            <basic name="name"/>
+            <basic name="version"/>
+            <one-to-many name="subClasses" mapped-by="templateClass"/>
+        </attributes>
+    </entity>
+
+    <entity class="example.entity.TemplateSubClass">
+        <named-entity-graph name="subClassEntityGraph">
+            <named-attribute-node name="serial"/>
+            <named-attribute-node name="templateClass"/>
+            <named-attribute-node name="details" subgraph="detailsSubGraph"/>
+            <subgraph name="detailsSubGraph">
+                <named-attribute-node name="note1"/>
+            </subgraph>
+        </named-entity-graph>
+
+        <attributes>
+            <id name="id">
+                <generated-value/>
+            </id>
+            <basic name="serial"/>
+            <many-to-one name="templateClass"/>
+            <one-to-many name="details" mapped-by="subClass"/>
+        </attributes>
+    </entity>
+
+    <entity class="example.entity.TemplateSubClassDetail">
+        <attributes>
+            <id name="id">
+                <generated-value/>
+            </id>
+            <basic name="note1"/>
+            <basic name="note2"/>
+            <many-to-one name="subClass"/>
+        </attributes>
+    </entity>
+
+</entity-mappings>
