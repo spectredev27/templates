@@ -39,7 +39,7 @@ public class Main {
             }
         });
 
-        repository.delete(1);
+        //repository.delete(1);
 
         TemplateSubClassRepository subClassRepository = new TemplateSubClassRepository();
         List<TemplateSubClass> subClasses = subClassRepository.selectAll();
