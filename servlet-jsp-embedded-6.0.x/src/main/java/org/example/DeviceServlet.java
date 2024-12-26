@@ -25,4 +25,27 @@ public class DeviceServlet extends HttpServlet {
         RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/devices.jsp");
         dispatcher.forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String firstName = req.getParameter("firstName");
+
+        if (firstName.isBlank()) {
+            req.setAttribute("isFirstNameValid", "false");
+        }
+
+        String lastName = req.getParameter("lastName");
+
+        if (lastName.isBlank()) {
+            req.setAttribute("isLastNameValid", "false");
+        }
+
+        if (!req.getAttributeNames().hasMoreElements()) {
+            req.setAttribute("isFormValid", "true");
+        }
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/create.jsp");
+        dispatcher.forward(req, resp);
+    }
+
 }

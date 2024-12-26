@@ -14,5 +14,6 @@
         <p><%= greetings %></p>
         <a href="jsp/java.jsp" target="_blank">Java</a>
         <a href="/devices" target="_blank">Devices</a>
+        <a href="jsp/create.jsp" target="_blank">Add new device</a>
     </body>
 </html>
