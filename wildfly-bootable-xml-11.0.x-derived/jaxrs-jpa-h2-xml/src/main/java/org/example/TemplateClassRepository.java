@@ -24,5 +24,14 @@ public class TemplateClassRepository {
         entityManager.persist(templateClass);
     }
 
+    @Transactional
+    public void update(TemplateClass templateClass) {
+        entityManager.merge(templateClass);
+    }
+
+    @Transactional
+    public void delete(int id) {
+        entityManager.remove(entityManager.find(TemplateClass.class, id));
+    }
 
 }

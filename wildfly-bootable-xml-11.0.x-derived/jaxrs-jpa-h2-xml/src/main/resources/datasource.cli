@@ -1,3 +1,5 @@
+/system-property=resteasy.preferJacksonOverJsonB:add(value=true)
+
 data-source add \
 --name=h2datasource \
 --jndi-name=java:jboss/datasources/H2DS \
