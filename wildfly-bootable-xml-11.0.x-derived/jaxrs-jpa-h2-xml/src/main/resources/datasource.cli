@@ -1,0 +1,7 @@
+data-source add \
+--name=h2datasource \
+--jndi-name=java:jboss/datasources/H2DS \
+--driver-name=h2 \
+--connection-url=jdbc:h2:mem:mydatabase;DB_CLOSE_DELAY=-1 \
+--user-name=h2username \
+--password=h2password
