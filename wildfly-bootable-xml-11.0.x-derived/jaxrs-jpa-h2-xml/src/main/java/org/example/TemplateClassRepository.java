@@ -13,9 +13,11 @@ public class TemplateClassRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
+    private final Class<TemplateClass> templateClass = TemplateClass.class;
 
     public List<TemplateClass> selectAll() {
-        TypedQuery<TemplateClass> result = entityManager.createQuery("select t from TemplateClass t", TemplateClass.class);
+        String query = "SELECT t FROM TemplateClass t";
+        TypedQuery<TemplateClass> result = entityManager.createQuery(query, templateClass);
         return result.getResultList();
     }
 
@@ -31,7 +33,7 @@ public class TemplateClassRepository {
 
     @Transactional
     public void delete(int id) {
-        entityManager.remove(entityManager.find(TemplateClass.class, id));
+        entityManager.remove(entityManager.find(templateClass, id));
     }
 
 }
