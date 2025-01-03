@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence/orm https://jakarta.ee/xml/ns/persistence/orm/orm_3_1.xsd"
+                 version="3.1">
+
+    <entity class="example.entity.Device">
+        <attributes>
+            <id name="id">
+                <generated-value/>
+            </id>
+            <basic name="brand"/>
+            <basic name="model"/>
+            <one-to-one name="subscription" mapped-by="device">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-one>
+        </attributes>
+    </entity>
+
+    <entity class="example.entity.Subscription">
+        <attributes>
+            <id name="id">
+                <generated-value/>
+            </id>
+            <basic name="billing"/>
+            <one-to-one name="device"/>
+        </attributes>
+    </entity>
+
+</entity-mappings>
