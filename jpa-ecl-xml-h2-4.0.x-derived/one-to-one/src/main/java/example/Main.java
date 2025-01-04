@@ -3,6 +3,7 @@ package example;
 import example.entity.Device;
 import example.entity.Subscription;
 import example.repository.DeviceRepository;
+import example.repository.SubscriptionRepository;
 
 import java.util.List;
 
@@ -24,13 +25,15 @@ public class Main {
 
         List<Device> devices = deviceRepository.selectAll();
         for (Device dev : devices) {
-            System.out.println("Id: " + dev.getId());
-            System.out.println("Brand: " + dev.getBrand());
-            System.out.println("Model: " + dev.getModel());
-            if (dev.getSubscription() != null) {
-                System.out.println("Billing: " + dev.getSubscription().getBilling());
-            }
+            JsonPrinter.print(dev);
         }
+
+        subscription.setDevice(null);
+
+        SubscriptionRepository subscriptionRepository = new SubscriptionRepository();
+        subscriptionRepository.update(subscription);
+
+
     }
 
 }

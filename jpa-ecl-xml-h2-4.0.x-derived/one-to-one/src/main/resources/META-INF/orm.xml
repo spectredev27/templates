@@ -13,7 +13,7 @@
             <basic name="model"/>
             <one-to-one name="subscription" mapped-by="device">
                 <cascade>
-                    <cascade-all/>
+                    <cascade-persist/>
                 </cascade>
             </one-to-one>
         </attributes>

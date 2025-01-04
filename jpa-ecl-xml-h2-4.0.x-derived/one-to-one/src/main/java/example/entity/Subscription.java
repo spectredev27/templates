@@ -1,9 +1,12 @@
 package example.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 public class Subscription {
 
     private int id;
     private String billing;
+    @JsonBackReference
     private Device device;
 
     public int getId() {

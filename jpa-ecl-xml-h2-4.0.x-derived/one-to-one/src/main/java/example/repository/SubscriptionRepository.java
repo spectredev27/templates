@@ -36,4 +36,14 @@ public class SubscriptionRepository {
         return subscriptions;
     }
 
+    public void update(Subscription subscription) {
+        EntityManager manager = factory.createEntityManager();
+        manager.getTransaction().begin();
+
+        manager.merge(subscription);
+
+        manager.getTransaction().commit();
+        manager.close();
+    }
+
 }
