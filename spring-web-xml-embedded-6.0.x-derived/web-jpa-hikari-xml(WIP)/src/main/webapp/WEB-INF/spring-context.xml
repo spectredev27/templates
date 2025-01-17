@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+	   http://www.springframework.org/schema/aop/spring-aop.xsd
+	   http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:mem:maindatabase;DB_CLOSE_DELAY=-1"/>
+        <property name="username" value="username"/>
+        <property name="password" value="password"/>
+    </bean>
+    -->
+
+    <!--
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="jdbcUrl" value="jdbc:h2:mem:maindatabase;DB_CLOSE_DELAY=-1"/>
+        <property name="username" value="id"/>
+        <property name="password" value="password"/>
+        <property name="dataSourceClassName" value="org.h2.jdbcx.JdbcDataSource"/>
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="url">jdbc:h2:mem:maindatabase;DB_CLOSE_DELAY=-1</prop>
+                <prop key="user">username</prop>
+                <prop key="password">password</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="dataSourceBean" class="com.zaxxer.hikari.HikariDataSource">
+        <constructor-arg ref="hikariConfig"/>
+    </bean>
+    -->
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <!--<property name="dataSource" ref="dataSource"/>-->
+        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
+    </bean>
+
+    <bean id="sharedEntityManagerBean" class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean id="transactionManagerBean" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManagerBean">
+        <tx:attributes>
+            <tx:method name="select*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="aapp" expression="execution(* example.service.TemplateService.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="aapp"/>
+    </aop:config>
+
+    <bean id="templateRepository" class="example.repository.TemplateRepository">
+        <constructor-arg ref="sharedEntityManagerBean"/>
+    </bean>
+
+    <bean id="templateService" class="example.service.TemplateService">
+        <constructor-arg ref="templateRepository"/>
+    </bean>
+
+    <context:component-scan base-package="example.controller"/>
+
+    <mvc:annotation-driven/>
+
+</beans>
